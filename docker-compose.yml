@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        ports:
+            - "127.0.0.1:81:80"
+        volumes:
+            - ./:/var/www/html
+            - ./docker/configs/nginx:/etc/nginx/conf.d
+            - ./docker/logs/nginx:/var/log/nginx
+        depends_on:
+            - php-fpm
+        networks:
+            - laravel
+
+    php-fpm:
+        build:
+            context: ./docker
+        container_name: php-fpm-truck-go
+        volumes:
+            - ./:/var/www/html
+            - ./docker/php.ini:/usr/local/etc/php/php.ini
+        depends_on:
+            - db
+        networks:
+            - laravel
+
+    db:
+        image: postgres:14.7-alpine
+        container_name: db-postgres
+        hostname: postgres
+        restart: unless-stopped
+        environment:
+            POSTGRES_USER: laravel
+            POSTGRES_DB: laravel
+            POSTGRES_PASSWORD: secret
+        ports:
+            - "5432:5432"
+        volumes:
+            - db_data:/var/lib/postgresql/data
+        networks:
+            - laravel
+
+    pgadmin:
+        image: dpage/pgadmin4:7
+        container_name: pgadmin4_container
+        restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - "5050:80"
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        networks:
+            - laravel
+
+networks:
+    laravel:
+        driver: bridge
+
+volumes:
+    db_data:
+        driver: local
+    pgadmin-data:
+        driver: local

@@ -1,0 +1,110 @@
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+@import "bootstrap/scss/mixins.scss";
+
+$primary: #FCE000;
+$secondary: #45464F;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+@import 'bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+html, body {
+    font-family: "Noto Sans", sans-serif !important;
+}
+
+.bg-img-start {
+    background-size: cover;
+    min-height: 100vh;
+    background-attachment: scroll;
+    background-position-x: 40%;
+}
+
+.logo {
+    font-size: 6rem;
+}
+
+.logo-icon {
+    width: 90vw;
+    max-width: 600px;
+}
+
+.nav-icon {
+    width: 200px;
+}
+
+.horizontal-line {
+    max-width: 400px;
+}
+
+.btn-primary {
+    color: $secondary !important;
+    border: 3px solid #9C6239;
+}
+
+.btn-secondary {
+    border: 3px solid #242531;
+    color: $primary !important;
+}
+
+.no-border {
+    border: none;
+}
+
+.btn-main {
+    max-width: 100%;
+}
+
+.form-control:focus {
+    border-color: $primary !important;
+    box-shadow: 0 0 0 0.2rem rgba(252, 224, 0, 0.25);
+}
+
+.form-control::placeholder {
+    opacity: 0.5;
+}
+
+.gradient-bottom {
+    background: linear-gradient(-12deg, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 40%);
+}
+
+.gradient-side {
+    background: linear-gradient(34deg, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 50%);
+}
+
+.asterisk-icon {
+    font-size: 1.2rem;
+    color: $danger;
+}
+
+.message__align {
+    height: 70vh;
+}
+
+.bg-black-opacity {
+    opacity: 0.6;
+}
+
+
+
+@include media-breakpoint-up(md) { 
+    .btn-main {
+        max-width: 350px;
+    }
+}
+
+@include media-breakpoint-up(lg) { 
+    .bg-img-start {
+        background-position-x: 10%;
+    }
+}
